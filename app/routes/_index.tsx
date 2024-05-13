@@ -72,7 +72,7 @@ export default function Index() {
         {colors.map((color, index) => {
           return (
             <Swatch
-              key={color}
+              key={`${color}-${index}`}
               color={color}
               onRemove={() => {
                 onRemoveColor(color);

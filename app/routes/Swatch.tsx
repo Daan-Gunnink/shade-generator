@@ -53,6 +53,17 @@ export default function Swatch({ color, onRemove }: SwatchProps) {
           }}
         >
           {Object.entries(shades).map(([key, shade]) => {
+            let textColor = darkShades["s800"];
+            if (
+              key === "s50" ||
+              key === "s100" ||
+              key === "s200" ||
+              key === "s300" ||
+              key === "s400"
+            ) {
+              textColor = darkShades["s200"];
+            }
+
             return (
               <div
                 style={{
@@ -60,13 +71,14 @@ export default function Swatch({ color, onRemove }: SwatchProps) {
                   flexDirection: "column",
                   width: "105px",
                   height: "100%",
+                  padding: "4px",
                   aspectRatio: 1,
                   backgroundColor: shade,
                 }}
                 key={key}
               >
-                <span style={{ color: darkShades[key] }}>{key}</span>
-                <span style={{ color: darkShades[key] }}>{shade}</span>
+                <span style={{ color: textColor }}>{key}</span>
+                <span style={{ color: textColor }}>{shade}</span>
               </div>
             );
           })}
@@ -75,25 +87,40 @@ export default function Swatch({ color, onRemove }: SwatchProps) {
           style={{
             width: "100%",
             padding: "32px",
+            backgroundColor: "#fff",
             alignItems: "center",
-            backgroundColor: "#1A1B1F",
             display: "flex",
             justifyContent: "center",
             flexDirection: "row",
           }}
         >
-          {Object.values(darkShades).map((shade) => {
+          {Object.entries(darkShades).map(([key, shade]) => {
+            let textColor = shades["s800"];
+            if (
+              key === "s50" ||
+              key === "s100" ||
+              key === "s200" ||
+              key === "s300" ||
+              key === "s400"
+            ) {
+              textColor = shades["s200"];
+            }
+
             return (
               <div
                 style={{
+                  display: "flex",
+                  flexDirection: "column",
                   width: "105px",
                   height: "100%",
+                  padding: "4px",
                   aspectRatio: 1,
                   backgroundColor: shade,
                 }}
-                key={shade}
+                key={key}
               >
-                {shade}
+                <span style={{ color: textColor }}>{key}</span>
+                <span style={{ color: textColor }}>{shade}</span>
               </div>
             );
           })}
