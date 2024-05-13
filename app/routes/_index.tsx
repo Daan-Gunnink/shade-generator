@@ -5,8 +5,11 @@ import GeneralControl from "./GeneralControl";
 import { useEffect, useState } from "react";
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Shade Generator" },
+    {
+      name: "description",
+      content: "Visualize the different shades generated",
+    },
   ];
 };
 
