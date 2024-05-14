@@ -87,7 +87,7 @@ export default function Swatch({ color, onRemove }: SwatchProps) {
           style={{
             width: "100%",
             padding: "32px",
-            backgroundColor: "#fff",
+            backgroundColor: "#1A1B1F",
             alignItems: "center",
             display: "flex",
             justifyContent: "center",
