@@ -1,13 +1,21 @@
-import getShadeMap, { hexToHSL } from "~/helpers/getShademap";
+import getShadeMap from "~/helpers/getShademap";
+import { shadeConfig } from "./Controls";
+import { useMemo } from "react";
 
 type SwatchProps = {
   color: string;
   onRemove: () => void;
+  config?: shadeConfig;
 };
 
-export default function Swatch({ color, onRemove }: SwatchProps) {
-  const shades = getShadeMap(color);
-  const darkShades = getShadeMap(color, true);
+export default function Swatch({ color, onRemove, config }: SwatchProps) {
+  const shades = useMemo(() => {
+    return getShadeMap(color, false, config);
+  }, [color, config]);
+
+  const darkShades = useMemo(() => {
+    return getShadeMap(color, true, config);
+  }, [color, config]);
 
   return (
     <div
@@ -28,7 +36,7 @@ export default function Swatch({ color, onRemove }: SwatchProps) {
           aria-hidden="true"
           className="flex cursor-pointer justify-center items-center bg-blue-500 w-8 h-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
         >
-          X
+          ×
         </div>
       </div>
       <div

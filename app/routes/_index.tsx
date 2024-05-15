@@ -1,8 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import Swatch from "./Swatch";
-import Control from "./Control";
-import GeneralControl from "./GeneralControl";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import Controls, { shadeConfig } from "./Controls";
 export const meta: MetaFunction = () => {
   return [
     { title: "Shade Generator" },
@@ -17,11 +16,16 @@ export default function Index() {
   const [colors, setColors] = useState(["#FD9727", "#F85A69", "#2ACA79"]);
   const [inputValue, setInputValue] = useState("");
   const [isValidHex, setIsValidHex] = useState(true);
-  const hexColorRegex = /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i;
+  const [config, setConfig] = useState<shadeConfig>(null);
 
   useEffect(() => {
+    const hexColorRegex = /^#?([0-9A-F]{3}|[0-9A-F]{6})$/i;
     setIsValidHex(hexColorRegex.test(inputValue));
-  }, [inputValue, hexColorRegex]);
+  }, [inputValue]);
+
+  const onChangeConfig = useCallback((newConfig: shadeConfig) => {
+    setConfig(newConfig);
+  }, []);
 
   const onRemoveColor = (index: number) => {
     const newColors = [...colors];
@@ -72,13 +76,17 @@ export default function Index() {
             +
           </button>
         </div>
+        <div>
+          <Controls onConfigChange={onChangeConfig} />
+        </div>
         {colors.map((color, index) => {
           return (
             <Swatch
               key={`${color}-${index}`}
+              config={config}
               color={color}
               onRemove={() => {
-                onRemoveColor(color);
+                onRemoveColor(index);
               }}
             />
           );

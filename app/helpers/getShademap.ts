@@ -1,3 +1,5 @@
+import { shadeConfig } from "~/routes/Controls";
+
 interface RGBObject {
   r: number;
   g: number;
@@ -205,12 +207,25 @@ function getLuminosityMap(
 
 export default function getShadeMap(
   baseColor: string,
-  isDarkMode: boolean = false
+  isDarkMode: boolean = false,
+  config?: shadeConfig
 ) {
+  let configWithDefaults = config as shadeConfig;
+  if (!configWithDefaults) {
+    configWithDefaults = {
+      luminosityIncreaseStep: 5,
+      luminosityDecreaseStep: 6,
+    };
+  }
+
   // Retrieve the HSL of the given hex color
   const baseHSL = hexToHSL(baseColor);
-  const decreaseSize = Math.round(baseHSL.luminosity / 6);
-  const increaseSize = Math.round((100 - baseHSL.luminosity) / 5);
+  const decreaseSize = Math.round(
+    baseHSL.luminosity / configWithDefaults.luminosityDecreaseStep
+  );
+  const increaseSize = Math.round(
+    (100 - baseHSL.luminosity) / configWithDefaults.luminosityIncreaseStep
+  );
 
   const luminosityMap = isDarkMode
     ? getLuminosityMapDarkMode(baseHSL.luminosity, increaseSize, decreaseSize)
