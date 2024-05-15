@@ -120,43 +120,91 @@ function clamp(value: number, min: number, max: number) {
 function getLuminosityMapDarkMode(
   baseLuminosity: number,
   stepIncreaseSize = 7,
-  stepDecreaseSize = 7
+  stepDecreaseSize = 7,
+  config?: { [key: string]: number }
 ) {
+  console.log(config);
   return [
     {
       key: 50,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 4.5, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s950 ?? 4.5),
+        0,
+        100
+      ),
     },
     {
       key: 100,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 4, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s900 ?? 4),
+        0,
+        100
+      ),
     },
     {
       key: 200,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 3, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s800 ?? 3),
+        0,
+        100
+      ),
     },
     {
       key: 300,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 2, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s700 ?? 2),
+        0,
+        100
+      ),
     },
-    { key: 400, luminosity: clamp(baseLuminosity - stepDecreaseSize, 0, 100) },
+    {
+      key: 400,
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s600 ?? 1),
+        0,
+        100
+      ),
+    },
     { key: 500, luminosity: baseLuminosity },
-    { key: 600, luminosity: clamp(baseLuminosity + stepIncreaseSize, 0, 100) },
+    {
+      key: 600,
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s400 ?? 1),
+        0,
+        100
+      ),
+    },
     {
       key: 700,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 2, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s300 ?? 2),
+        0,
+        100
+      ),
     },
     {
       key: 800,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 3, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s200 ?? 3),
+        0,
+        100
+      ),
     },
     {
       key: 900,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 4, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s100 ?? 4),
+        0,
+        100
+      ),
     },
     {
       key: 950,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 4.5, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s50 ?? 4.5),
+        0,
+        100
+      ),
     },
   ];
 }
@@ -164,43 +212,91 @@ function getLuminosityMapDarkMode(
 function getLuminosityMap(
   baseLuminosity: number,
   stepIncreaseSize = 7,
-  stepDecreaseSize = 7
+  stepDecreaseSize = 7,
+  config?: { [key: string]: number }
 ) {
+  console.log(config);
   return [
     {
       key: 50,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 4.5, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s50 ?? 4.5),
+        0,
+        100
+      ),
     },
     {
       key: 100,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 4, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s100 ?? 4),
+        0,
+        100
+      ),
     },
     {
       key: 200,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 3, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s200 ?? 3),
+        0,
+        100
+      ),
     },
     {
       key: 300,
-      luminosity: clamp(baseLuminosity + stepIncreaseSize * 2, 0, 100),
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s300 ?? 2),
+        0,
+        100
+      ),
     },
-    { key: 400, luminosity: clamp(baseLuminosity + stepIncreaseSize, 0, 100) },
+    {
+      key: 400,
+      luminosity: clamp(
+        baseLuminosity + stepIncreaseSize * (config?.s400 ?? 1),
+        0,
+        100
+      ),
+    },
     { key: 500, luminosity: baseLuminosity },
-    { key: 600, luminosity: clamp(baseLuminosity - stepDecreaseSize, 0, 100) },
+    {
+      key: 600,
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s600 ?? 1),
+        0,
+        100
+      ),
+    },
     {
       key: 700,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 2, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s700 ?? 2),
+        0,
+        100
+      ),
     },
     {
       key: 800,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 3, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s800 ?? 3),
+        0,
+        100
+      ),
     },
     {
       key: 900,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 4, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s900 ?? 4),
+        0,
+        100
+      ),
     },
     {
       key: 950,
-      luminosity: clamp(baseLuminosity - stepDecreaseSize * 4.5, 0, 100),
+      luminosity: clamp(
+        baseLuminosity - stepDecreaseSize * (config?.s950 ?? 4.5),
+        0,
+        100
+      ),
     },
   ];
 }
@@ -228,8 +324,18 @@ export default function getShadeMap(
   );
 
   const luminosityMap = isDarkMode
-    ? getLuminosityMapDarkMode(baseHSL.luminosity, increaseSize, decreaseSize)
-    : getLuminosityMap(baseHSL.luminosity, increaseSize, decreaseSize);
+    ? getLuminosityMapDarkMode(
+        baseHSL.luminosity,
+        increaseSize,
+        decreaseSize,
+        config?.luminosityMultiplierModifiers
+      )
+    : getLuminosityMap(
+        baseHSL.luminosity,
+        increaseSize,
+        decreaseSize,
+        config?.luminosityMultiplierModifiers
+      );
 
   return luminosityMap.reduce((acc, { key, luminosity }) => {
     const keyString = `s${key}` as ColorShade;
